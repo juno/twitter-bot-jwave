@@ -1,4 +1,8 @@
-See http://github.com/juno/twitter-bot-jwave/ for the latest development.
+2010-05-04  Junya Ogura  <junyaogura@gmail.com>
+
+	* 0.2 released.
+
+	* jwave.rb: added require for rubygems.
 
 2010-05-04  Junya Ogura  <junyaogura@gmail.com>
 
