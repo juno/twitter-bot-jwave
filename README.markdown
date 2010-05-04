@@ -11,8 +11,6 @@ Track information fetch from http://www.j-wave.co.jp/alladdin/
 PREREQUISITE
 ----
 
-This bot needs following gems.
-
     $ sudo gem install twitter_oauth bitly
 
 
