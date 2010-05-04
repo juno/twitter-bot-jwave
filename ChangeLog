@@ -1,3 +1,10 @@
+2010-05-05  Junya Ogura  <junyaogura@gmail.com>
+
+	* 0.3 released.
+
+	* jwave.rb (Jwave::Updater#build_message): removed parentheses from
+	message.
+
 2010-05-04  Junya Ogura  <junyaogura@gmail.com>
 
 	* 0.2 released.

@@ -61,7 +61,7 @@ module Jwave
     # @return [String]
     def build_message(data)
       url = shorten_url(data.url)
-      "#{data.information} (#{url})"
+      "#{data.information} #{url}"
     end
 
     # @param [String] url
