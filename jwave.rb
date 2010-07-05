@@ -67,12 +67,9 @@ module Jwave
     # @param [String] url
     # @return [String]
     def shorten_url(url)
-      bitly.shorten(url, :histroy => 1).short_url
-    end
-
-    # @return [Bitly]
-    def bitly
-      Bitly.new(@bitly['user_name'], @bitly['api_key'])
+      bitly = Bitly::Url.new(@bitly['user_name'], @bitly['api_key'], :long_url => url)
+      bitly.shorten
+      bitly.bitly_url
     end
   end
 

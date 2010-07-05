@@ -1,3 +1,9 @@
+2010-07-06  Junya Ogura  <junyaogura@gmail.com>
+
+	* 0.4 released.
+
+	* jwave.rb (Jwave::Updater#shorten_url): updated to use bit.ly version 3 API.
+
 2010-05-05  Junya Ogura  <junyaogura@gmail.com>
 
 	* 0.3 released.
