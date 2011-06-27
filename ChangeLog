@@ -1,3 +1,10 @@
+2011-06-27  Junya Ogura  <junyaogura@gmail.com>
+
+	* 0.5 released.
+
+	* jwave.rb (Jwave::Updater#shorten_url): updated to use goo.gl API.
+	removed bit.ly configuration.
+
 2010-07-06  Junya Ogura  <junyaogura@gmail.com>
 
 	* 0.4 released.

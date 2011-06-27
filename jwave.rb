@@ -2,14 +2,13 @@ require 'rubygems'
 require 'open-uri'
 require 'rexml/document'
 require 'twitter_oauth'
-require 'bitly'
+require 'googl'
 
 module Jwave
   class Updater
     def initialize(config)
       @cache_path = config['cache_path']
       @xml_url = config['xml_url']
-      @bitly = config['bitly']
       @oauth = config['oauth']
     end
 
@@ -67,9 +66,8 @@ module Jwave
     # @param [String] url
     # @return [String]
     def shorten_url(url)
-      bitly = Bitly::Url.new(@bitly['user_name'], @bitly['api_key'], :long_url => url)
-      bitly.shorten
-      bitly.bitly_url
+      url = Googl.shorten(url)
+      url.short_url
     end
   end
 
