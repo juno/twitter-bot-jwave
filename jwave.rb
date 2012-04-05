@@ -20,6 +20,10 @@ module Jwave
       data = OnAirData.new(last_modified, xml)
       store_cache data
       tweet build_message(data)
+    rescue SocketError => e
+      # ignore Name or service not known error
+    rescue JSON::ParserError => e
+      # ignore twitter error HTML
     end
 
     private
