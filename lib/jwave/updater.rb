@@ -1,41 +1,70 @@
 require 'open-uri'
+require 'redis'
 require 'twitter_oauth'
 require 'googl'
 
 module Jwave
   class Updater
+    XML_URL = 'http://www.j-wave.co.jp/top/xml/now_on_air_song.xml'
+    CACHE_KEY = 'jwave_cache'
+    SLEEP_SECONDS = 60 * 2
+
+    def self.run
+      $stdout.sync = true
+      $stdout.puts 'Starting...'
+      updater = self.new
+      loop do
+        updater.update
+        sleep(SLEEP_SECONDS)
+      end
+    rescue Interrupt => e
+      $stderr.puts "Interrupt: #{e.message}"
+    rescue SignalException => e
+      $stderr.puts "Signal exception: #{e.message}"
+    ensure
+      $stdout.puts 'Exit'
+    end
+
     def initialize
-      @cache_path = ENV['CACHE_PATH']
+      uri = URI.parse(ENV['REDIS_URL'] || ENV['REDISTOGO_URL'])
+      $stdout.puts "Connecting to Redis: #{uri}"
+      @redis = Redis.new(host: uri.host, port: uri.port, password: uri.password)
     end
 
     def update
-      cache = load_cache
+      $stdout.puts 'Loading XML'
+      cached_data = load_cache
       last_modified, xml = load_xml
-      return if cache && !cache.expired?(last_modified)
+      if cached_data && !cached_data.expired?(last_modified)
+        $stdout.puts 'Cache hit. Skip.'
+        return
+      end
 
       data = OnAirData.new(last_modified, xml)
       store_cache data
+      $stdout.puts "Tweet message: #{data}"
       tweet build_message(data)
     rescue SocketError => e
       # ignore Name or service not known error
+      $stderr.puts "SocketError: #{e.message}"
     rescue JSON::ParserError => e
       # ignore twitter error HTML
+      $stderr.puts "JSON::ParseError: #{e.message}"
     end
 
     private
 
     # @return [OnAirData, nil]
     def load_cache
-      return nil unless File.exist?(@cache_path)
-      buf = ''
-      File.open(@cache_path, 'r') {|f| buf = f.readlines.join }
-      YAML.load buf
+      value = @redis.get(CACHE_KEY)
+      return nil unless value
+      YAML.load(value)
     end
 
     # @return [Array]
     def load_xml
       last_modified = xml = ''
-      open(ENV['XML_URL']) do |f|
+      open(XML_URL) do |f|
         last_modified = f.last_modified
         xml = f.readlines.join
       end
@@ -44,7 +73,7 @@ module Jwave
 
     # @param [OnAirData] data
     def store_cache(data)
-      File.open(@cache_path, 'w') {|f| f.write YAML.dump(data) }
+      @redis.set(CACHE_KEY, YAML.dump(data))
     end
 
     # @param [String] message

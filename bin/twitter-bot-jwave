@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require_relative '../lib/jwave'
 
-Jwave::Updater.new.update
+Jwave::Updater.run

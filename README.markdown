@@ -1,34 +1,61 @@
-J-WAVE NOW ON-AIR twitter bot
-====
+# J-WAVE NOW ON-AIR twitter bot
 
-DESCRIPTION
-----
+## DESCRIPTION
 
 This bot is post current track of Japanese radio station J-WAVE.
 Track information fetch from http://www.j-wave.co.jp/alladdin/
 
 
-PREREQUISITE
-----
+## SETUP
 
-    $ bundle
+Install redis.
+
+    $ brew install redis
+
+Bundle gems.
+
+    $ bundle install --path .bundle
+
+Create and edit `.env` file to set Redis URL and Twitter OAuth API keys.
+
+    $ cp example.env .env
+    $ vi .env
 
 
-USAGE
-----
+## USAGE
 
-Edit config.yml and set Bit.ly and Twitter OAuth API keys.
+    $ redis-server &
+    $ bundle exec foreman start
 
-    $ vi config.xml
 
-Create cache file and set permissions.
+## DEPLOYMENT TO HEROKU
 
-    $ touch cache.txt
-    $ chmod 644 cache.txt
+Create a new app.
 
-Run script.
+    $ heroku create [YOUR_APP_NAME]
 
-    $ bundle exec ruby ruby-jwave.rb
+Add `redistogo:nano` addon.
+
+    $ heroku addons:add redistogo:nano
+
+Set configuration env.
+
+    $ heroku config:set TWITTER_CONSUMER_KEY="..." \
+      TWITTER_CONSUMER_SECRET="..." \
+      TWITTER_TOKEN="..." \
+      TWITTER_SECRET="..."
+
+Push to deploy.
+
+    $ git push heroku master
+
+Start `bot` process.
+
+    $ heroku ps:scale bot=1
+
+Check log.
+
+    $ heroku logs
 
 
 CONTACT

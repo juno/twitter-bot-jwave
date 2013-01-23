@@ -17,6 +17,10 @@ module Jwave
       @last_modified != last_modified
     end
 
+    def to_s
+      "#{information} #{url}"
+    end
+
     private
 
     # @param [String] xml
