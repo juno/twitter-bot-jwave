@@ -32,8 +32,8 @@ module Jwave
     end
 
     def update
-      $stdout.puts 'Loading XML'
       cached_data = load_cache
+      $stdout.puts 'Loading XML'
       last_modified, xml = load_xml
       if cached_data && !cached_data.expired?(last_modified)
         $stdout.puts 'Cache hit. Skip.'
