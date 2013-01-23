@@ -28,7 +28,7 @@ Create cache file and set permissions.
 
 Run script.
 
-    $ ./ruby-jwave.rb
+    $ bundle exec ruby ruby-jwave.rb
 
 
 CONTACT
