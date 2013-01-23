@@ -1,15 +1,11 @@
-require 'rubygems'
 require 'open-uri'
-require 'rexml/document'
 require 'twitter_oauth'
 require 'googl'
 
 module Jwave
   class Updater
-    def initialize(config)
-      @cache_path = config['cache_path']
-      @xml_url = config['xml_url']
-      @oauth = config['oauth']
+    def initialize
+      @cache_path = ENV['CACHE_PATH']
     end
 
     def update
@@ -39,7 +35,7 @@ module Jwave
     # @return [Array]
     def load_xml
       last_modified = xml = ''
-      open(@xml_url) do |f|
+      open(ENV['XML_URL']) do |f|
         last_modified = f.last_modified
         xml = f.readlines.join
       end
@@ -53,10 +49,10 @@ module Jwave
 
     # @param [String] message
     def tweet(message)
-      t = TwitterOAuth::Client.new(:consumer_key => @oauth['consumer_key'],
-                                   :consumer_secret => @oauth['consumer_secret'],
-                                   :token => @oauth['token'],
-                                   :secret => @oauth['secret'])
+      t = TwitterOAuth::Client.new(consumer_key: ENV['TWITTER_CONSUMER_KEY'],
+                                   consumer_secret: ENV['TWITTER_CONSUMER_SECRET'],
+                                   token: ENV['TWITTER_TOKEN'],
+                                   secret: ENV['TWITTER_SECRET'])
       t.update message
     end
 
@@ -72,34 +68,6 @@ module Jwave
     def shorten_url(url)
       url = Googl.shorten(url)
       url.short_url
-    end
-  end
-
-
-  class OnAirData
-    attr_reader :last_modified, :information, :url
-
-    # @param [String] last_modified
-    # @param [String] xml
-    def initialize(last_modified, xml)
-      @last_modified = last_modified
-      parse(xml)
-    end
-
-    # @param [String] last_modified
-    # @return [Boolean]
-    def expired?(last_modified)
-      @last_modified != last_modified
-    end
-
-    private
-
-    # @param [String] xml
-    def parse(xml)
-      doc = REXML::Document.new(xml)
-      data = doc.elements['/now_on_air_song/data[1]']
-      @information = data.attributes['information']
-      @url = data.attributes['cd_url']
     end
   end
 end
