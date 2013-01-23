@@ -61,7 +61,7 @@ Check log.
 CONTACT
 -----
 
-*  Junya Ogura <junyaogura@gmail.com>
+*  Junya Ogura <junyaogura at gmail.com>
 *  twitter.com/junya
 
 
