@@ -1,5 +1,7 @@
 # J-WAVE NOW ON-AIR twitter bot
 
+[![Gemnasium](https://gemnasium.com/juno/twitter-bot-jwave.png)](https://gemnasium.com/juno/twitter-bot-jwave)
+
 ## DESCRIPTION
 
 This bot is post current track of Japanese radio station J-WAVE.
