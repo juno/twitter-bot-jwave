@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'redis'
 require 'twitter_oauth'
-require 'googl'
+require 'yaml'
 
 module Jwave
   class Updater
@@ -88,15 +88,7 @@ module Jwave
     # @param [OnAirData] data
     # @return [String]
     def build_message(data)
-      url = shorten_url(data.url)
-      "#{data.information} #{url}"
-    end
-
-    # @param [String] url
-    # @return [String]
-    def shorten_url(url)
-      url = Googl.shorten(url)
-      url.short_url
+      "#{data.information} #{data.url}"
     end
   end
 end

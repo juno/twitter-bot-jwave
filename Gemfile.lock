@@ -5,16 +5,8 @@ GEM
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
-    googl (0.6.3)
-      httparty (~> 0.10.0)
-      json (>= 1.4.6)
-    httparty (0.10.2)
-      multi_json (~> 1.0)
-      multi_xml (>= 0.5.2)
     json (1.8.1)
     mime-types (2.0)
-    multi_json (1.8.2)
-    multi_xml (0.5.5)
     oauth (0.4.7)
     redis (3.0.6)
     thor (0.18.1)
@@ -28,6 +20,5 @@ PLATFORMS
 
 DEPENDENCIES
   foreman (= 0.63.0)
-  googl (= 0.6.3)
   redis (= 3.0.6)
   twitter_oauth (= 0.4.94)
