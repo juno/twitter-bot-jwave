@@ -6,7 +6,7 @@ GEM
     json (1.8.1)
     mime-types (2.0)
     oauth (0.4.7)
-    redis (3.0.6)
+    redis (3.2.1)
     thor (0.19.1)
     twitter_oauth (0.4.94)
       json (>= 1.8.0)
@@ -18,5 +18,5 @@ PLATFORMS
 
 DEPENDENCIES
   foreman (= 0.78.0)
-  redis (= 3.0.6)
+  redis (= 3.2.1)
   twitter_oauth (= 0.4.94)
