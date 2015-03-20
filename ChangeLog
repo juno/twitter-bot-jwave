@@ -1,3 +1,11 @@
+2015-03-20  Junya Ogura  <junyaogura@gmail.com>
+
+	* 0.6 released.
+	* remove Google URL Shortener.
+	* update ruby to 2.2.1.
+	* update foreman to 0.78.0.
+	* update redis to 3.2.1.
+
 2011-06-27  Junya Ogura  <junyaogura@gmail.com>
 
 	* 0.5 released.
