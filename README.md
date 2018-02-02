@@ -1,7 +1,5 @@
 # J-WAVE NOW ON-AIR twitter bot
 
-[![Gemnasium](https://gemnasium.com/juno/twitter-bot-jwave.png)](https://gemnasium.com/juno/twitter-bot-jwave)
-
 ## DESCRIPTION
 
 This bot is post current track of Japanese radio station J-WAVE.
@@ -63,8 +61,7 @@ Check log.
 CONTACT
 -----
 
-*  Junya Ogura <junyaogura at gmail.com>
-*  twitter.com/junya
+*  Junya Ogura - https://twitter.com/junya
 
 
 LICENSE
@@ -72,7 +69,7 @@ LICENSE
 
 (The MIT License)
 
-Copyright (c) 2010-2015 Junya Ogura
+Copyright (c) 2010-2018 Junya Ogura
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
