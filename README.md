@@ -2,8 +2,8 @@
 
 ## DESCRIPTION
 
-This bot is post current track of Japanese radio station J-WAVE.
-Track information fetch from http://www.j-wave.co.jp/alladdin/
+This bot posts about songs which aired from the Japanese Radio Station "J-WAVE".
+Song information will fetched from http://www.j-wave.co.jp/alladdin/ .
 
 
 ## SETUP
