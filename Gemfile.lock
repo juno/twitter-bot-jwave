@@ -8,7 +8,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     oauth (0.5.4)
-    redis (4.0.3)
+    redis (4.1.0)
     thor (0.19.4)
     twitter_oauth (0.4.94)
       json (>= 1.8.0)
@@ -20,7 +20,7 @@ PLATFORMS
 
 DEPENDENCIES
   foreman (~> 0.84.0)
-  redis (~> 4.0.3)
+  redis (~> 4.1.0)
   twitter_oauth (~> 0.4.94)
 
 RUBY VERSION
