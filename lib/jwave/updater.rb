@@ -43,7 +43,8 @@ module Jwave
       data = OnAirData.new(last_modified, xml)
       store_cache data
       $stdout.puts "Tweet message: #{data}"
-      tweet build_message(data)
+      message = build_message(data)
+      ENV["DRY_RUN"] != "" ? tweet(message) : $stdout.puts(message)
     rescue SocketError => e
       # ignore Name or service not known error
       $stderr.puts "SocketError: #{e.message}"
