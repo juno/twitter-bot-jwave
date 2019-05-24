@@ -25,7 +25,7 @@ Create and edit `.env` file to set Redis URL and Twitter OAuth API keys.
 ## USAGE
 
     $ redis-server &
-    $ heroku run local
+    $ heroku local
 
 
 ## DEPLOYMENT TO HEROKU
