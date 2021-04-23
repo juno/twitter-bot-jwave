@@ -2,4 +2,4 @@
 .env
 .ruby-version
 dump.rdb
-
+vendor
