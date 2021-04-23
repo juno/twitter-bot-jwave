@@ -65,7 +65,7 @@ module Jwave
     # @return [Array]
     def load_xml
       last_modified = xml = ''
-      open(XML_URL) do |f|
+      URI.open(XML_URL) do |f|
         last_modified = f.last_modified
         xml = f.readlines.join
       end
