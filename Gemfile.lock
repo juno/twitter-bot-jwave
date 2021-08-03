@@ -10,7 +10,7 @@ GEM
     mime-types-data (3.2021.0225)
     multi_json (1.15.0)
     oauth (0.5.6)
-    redis (4.3.1)
+    redis (4.4.0)
     rexml (3.2.5)
     statsd-ruby (1.5.0)
     twitter_oauth (0.4.94)
@@ -23,7 +23,7 @@ PLATFORMS
 
 DEPENDENCIES
   barnes (~> 0.0.9)
-  redis (~> 4.3.1)
+  redis (~> 4.4.0)
   rexml (~> 3.2.5)
   twitter_oauth (~> 0.4.94)
 
