@@ -1,1 +1,1 @@
-bot: bundle exec ruby bin/twitter-bot-jwave
+worker: bundle exec ruby bin/twitter-bot-jwave
