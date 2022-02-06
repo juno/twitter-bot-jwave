@@ -63,7 +63,7 @@ module Jwave
       value = @redis.get(CACHE_KEY)
       return nil unless value
 
-      YAML.load(value)
+      YAML.unsafe_load(value)
     end
 
     # @return [Array]
