@@ -10,6 +10,7 @@ gem "rexml", "~> 3.2.5"
 gem "twitter_oauth", "~> 0.4.94"
 
 group :development, :test do
+  gem "rspec"
   gem "rubocop"
   gem "rubocop-performance"
   gem "rubocop-rspec"
