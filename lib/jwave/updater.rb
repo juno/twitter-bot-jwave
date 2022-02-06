@@ -1,42 +1,45 @@
-require 'open-uri'
-require 'redis'
-require 'twitter_oauth'
-require 'yaml'
+# frozen_string_literal: true
+
+require "open-uri"
+require "redis"
+require "twitter_oauth"
+require "yaml"
 
 module Jwave
+  # Tweet updater
   class Updater
-    XML_URL = 'http://www.j-wave.co.jp/top/xml/now_on_air_song.xml'
-    CACHE_KEY = 'jwave_cache'
+    XML_URL = "http://www.j-wave.co.jp/top/xml/now_on_air_song.xml"
+    CACHE_KEY = "jwave_cache"
     SLEEP_SECONDS = 60 * 2
 
     def self.run
       $stdout.sync = true
-      $stdout.puts 'Starting...'
-      updater = self.new
+      $stdout.puts "Starting..."
+      updater = new
       loop do
         updater.update
         sleep(SLEEP_SECONDS)
       end
     rescue Interrupt => e
-      $stderr.puts "Interrupt: #{e.message}"
+      warn "Interrupt: #{e.message}"
     rescue SignalException => e
-      $stderr.puts "Signal exception: #{e.message}"
+      warn "Signal exception: #{e.message}"
     ensure
-      $stdout.puts 'Exit'
+      $stdout.puts "Exit"
     end
 
     def initialize
-      uri = URI.parse(ENV['REDIS_URL'] || ENV['REDISTOGO_URL'])
+      uri = URI.parse(ENV["REDIS_URL"] || ENV["REDISTOGO_URL"])
       $stdout.puts "Connecting to Redis: #{uri}"
       @redis = Redis.new(host: uri.host, port: uri.port, password: uri.password)
     end
 
     def update
       cached_data = load_cache
-      $stdout.puts 'Loading XML'
+      $stdout.puts "Loading XML"
       last_modified, xml = load_xml
       if cached_data && !cached_data.expired?(last_modified)
-        $stdout.puts 'Cache hit. Skip.'
+        $stdout.puts "Cache hit. Skip."
         return
       end
 
@@ -47,10 +50,10 @@ module Jwave
       ENV["DRY_RUN"] != "" ? tweet(message) : $stdout.puts(message)
     rescue SocketError => e
       # ignore Name or service not known error
-      $stderr.puts "SocketError: #{e.message}"
+      warn "SocketError: #{e.message}"
     rescue JSON::ParserError => e
       # ignore twitter error HTML
-      $stderr.puts "JSON::ParseError: #{e.message}"
+      warn "JSON::ParseError: #{e.message}"
     end
 
     private
@@ -59,12 +62,13 @@ module Jwave
     def load_cache
       value = @redis.get(CACHE_KEY)
       return nil unless value
+
       YAML.load(value)
     end
 
     # @return [Array]
     def load_xml
-      last_modified = xml = ''
+      last_modified = xml = ""
       URI.open(XML_URL) do |f|
         last_modified = f.last_modified
         xml = f.readlines.join
@@ -79,10 +83,12 @@ module Jwave
 
     # @param [String] message
     def tweet(message)
-      t = TwitterOAuth::Client.new(consumer_key: ENV['TWITTER_CONSUMER_KEY'],
-                                   consumer_secret: ENV['TWITTER_CONSUMER_SECRET'],
-                                   token: ENV['TWITTER_TOKEN'],
-                                   secret: ENV['TWITTER_SECRET'])
+      t = TwitterOAuth::Client.new(
+        consumer_key: ENV["TWITTER_CONSUMER_KEY"],
+        consumer_secret: ENV["TWITTER_CONSUMER_SECRET"],
+        token: ENV["TWITTER_TOKEN"],
+        secret: ENV["TWITTER_SECRET"],
+      )
       t.update message
     end
 

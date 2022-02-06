@@ -1,6 +1,9 @@
-require 'rexml/document'
+# frozen_string_literal: true
+
+require "rexml/document"
 
 module Jwave
+  # Represent on-air data
   class OnAirData
     attr_reader :last_modified, :information, :url
 
@@ -26,9 +29,9 @@ module Jwave
     # @param [String] xml
     def parse(xml)
       doc = REXML::Document.new(xml)
-      data = doc.elements['/now_on_air_song/data[1]']
-      @information = data.attributes['information']
-      @url = data.attributes['cd_url']
+      data = doc.elements["/now_on_air_song/data[1]"]
+      @information = data.attributes["information"]
+      @url = data.attributes["cd_url"]
     end
   end
 end

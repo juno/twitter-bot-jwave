@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
-require 'barnes'
-require_relative '../lib/jwave'
+# frozen_string_literal: true
+
+require "barnes"
+require_relative "../lib/jwave"
 
 Jwave::Updater.run
