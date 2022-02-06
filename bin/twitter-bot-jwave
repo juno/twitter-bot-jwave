@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require "barnes"
+require "sentry-ruby"
 require_relative "../lib/jwave"
 
 Sentry.init do |config|
