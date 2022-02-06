@@ -4,4 +4,22 @@
 require "barnes"
 require_relative "../lib/jwave"
 
-Jwave::Updater.run
+Sentry.init do |config|
+  config.dsn = ENV["SENTRY_DSN"]
+
+  # Set traces_sample_rate to 1.0 to capture 100%
+  # of transactions for performance monitoring.
+  # We recommend adjusting this value in production.
+  config.traces_sample_rate = 1.0
+  # or
+  config.traces_sampler = lambda do |context|
+    true
+  end
+end
+
+begin
+  Jwave::Updater.run
+rescue => e
+  Sentry.capture_exception(e)
+  raise
+end
