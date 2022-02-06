@@ -1,0 +1,20 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rubycw
+
+inherit_mode:
+  merge:
+    - Include
+
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - 'vendor/**/*'
+
+StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
