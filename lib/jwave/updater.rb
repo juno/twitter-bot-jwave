@@ -47,7 +47,7 @@ module Jwave
       store_cache data
       $stdout.puts "Tweet message: #{data}"
       message = build_message(data)
-      ENV["DRY_RUN"] != "" ? tweet(message) : $stdout.puts(message)
+      ENV["DRY_RUN"] == "" ? $stdout.puts(message) : tweet(message)
     rescue SocketError => e
       # ignore Name or service not known error
       warn "SocketError: #{e.message}"
