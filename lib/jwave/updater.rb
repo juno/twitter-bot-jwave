@@ -2,7 +2,7 @@
 
 require "open-uri"
 require "redis"
-require "twitter_oauth"
+require "simple_twitter"
 require "yaml"
 
 module Jwave
@@ -83,13 +83,14 @@ module Jwave
 
     # @param [String] message
     def tweet(message)
-      t = TwitterOAuth::Client.new(
-        consumer_key: ENV["TWITTER_CONSUMER_KEY"],
-        consumer_secret: ENV["TWITTER_CONSUMER_SECRET"],
-        token: ENV["TWITTER_TOKEN"],
-        secret: ENV["TWITTER_SECRET"],
+      client = SimpleTwitter::Client.new(
+        api_key: ENV["TWITTER_CONSUMER_KEY"],
+        api_secret_key: ENV["TWITTER_CONSUMER_SECRET"],
+        access_token: ENV["TWITTER_TOKEN"],
+        access_token_secret: ENV["TWITTER_SECRET"],
       )
-      t.update message
+      response = client.post("https://api.twitter.com/2/tweets", text: message)
+      $stdout.puts "Tweet response: #{response.body}"
     end
 
     # @param [OnAirData] data
