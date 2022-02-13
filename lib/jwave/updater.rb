@@ -89,8 +89,8 @@ module Jwave
         access_token: ENV["TWITTER_TOKEN"],
         access_token_secret: ENV["TWITTER_SECRET"],
       )
-      response = client.post("https://api.twitter.com/2/tweets", text: message)
-      $stdout.puts "Tweet response: #{response.body}"
+      response = client.post("https://api.twitter.com/1.1/statuses/update.json", status: message)
+      $stdout.puts "Tweet response: #{response.inspect}"
     end
 
     # @param [OnAirData] data
