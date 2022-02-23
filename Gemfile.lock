@@ -81,8 +81,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  redis (~> 4.6.0)
-  rexml (~> 3.2.5)
+  redis
+  rexml
   rspec
   rubocop
   rubocop-performance

@@ -4,8 +4,8 @@ source "https://rubygems.org"
 
 ruby "3.1.1"
 
-gem "redis", "~> 4.6.0"
-gem "rexml", "~> 3.2.5"
+gem "redis"
+gem "rexml"
 gem "sentry-ruby"
 gem "simple_twitter"
 
