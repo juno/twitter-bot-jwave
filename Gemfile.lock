@@ -4,9 +4,6 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
-    barnes (0.0.9)
-      multi_json (~> 1)
-      statsd-ruby (~> 1.1)
     concurrent-ruby (1.1.9)
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
@@ -25,7 +22,6 @@ GEM
     http-form_data (2.3.0)
     http-parser (1.2.3)
       ffi-compiler (>= 1.0, < 2.0)
-    multi_json (1.15.0)
     parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
@@ -76,7 +72,6 @@ GEM
     simple_twitter (1.0.0)
       http (~> 4)
       simple_oauth (~> 0.3.1)
-    statsd-ruby (1.5.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8)
@@ -86,7 +81,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  barnes (~> 0.0.9)
   redis (~> 4.6.0)
   rexml (~> 3.2.5)
   rspec

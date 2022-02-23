@@ -4,7 +4,6 @@ source "https://rubygems.org"
 
 ruby "3.1.1"
 
-gem "barnes", "~> 0.0.9"
 gem "redis", "~> 4.6.0"
 gem "rexml", "~> 3.2.5"
 gem "sentry-ruby"
