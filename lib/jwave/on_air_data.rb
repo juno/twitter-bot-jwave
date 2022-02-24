@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rexml/document"
+require "nokogiri"
 
 module Jwave
   # Represent on-air data
@@ -28,10 +28,10 @@ module Jwave
 
     # @param [String] xml
     def parse(xml)
-      doc = REXML::Document.new(xml)
-      data = doc.elements["/now_on_air_song/data[1]"]
-      @information = data.attributes["information"]
-      @url = data.attributes["cd_url"]
+      doc = Nokogiri::XML(xml)
+      node = doc.xpath("//now_on_air_song/data").first
+      @information = node.attr("information")
+      @url = node.attr("cd_url")
     end
   end
 end
