@@ -8,7 +8,7 @@ require "yaml"
 module Jwave
   # Tweet updater
   class Updater
-    XML_URL = "http://www.j-wave.co.jp/top/xml/now_on_air_song.xml"
+    XML_URL = "https://www.j-wave.co.jp/top/xml/now_on_air_song_v2.xml"
     CACHE_KEY = "jwave_cache"
     SLEEP_SECONDS = 60 * 2
 

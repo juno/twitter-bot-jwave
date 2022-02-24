@@ -31,7 +31,7 @@ module Jwave
       doc = Nokogiri::XML(xml)
       node = doc.xpath("//now_on_air_song/data").first
       @information = node.attr("information")
-      @url = node.attr("cd_url")
+      @url = node.attr("amazon_url")
     end
   end
 end
