@@ -2,8 +2,9 @@
 
 require "open-uri"
 require "redis"
-require "simple_twitter"
 require "yaml"
+
+require_relative "twitter"
 
 module Jwave
   # Tweet updater
@@ -47,7 +48,12 @@ module Jwave
       store_cache data
       $stdout.puts "Tweet message: #{data}"
       message = build_message(data)
-      ENV["DRY_RUN"] == "" ? $stdout.puts(message) : tweet(message)
+      if ENV["DRY_RUN"] == ""
+        tweet(message)
+      else
+        $stdout.puts "[Dry run]"
+        $stdout.puts(message)
+      end
     rescue SocketError => e
       # ignore Name or service not known error
       warn "SocketError: #{e.message}"
@@ -83,13 +89,7 @@ module Jwave
 
     # @param [String] message
     def tweet(message)
-      client = SimpleTwitter::Client.new(
-        api_key: ENV["TWITTER_CONSUMER_KEY"],
-        api_secret_key: ENV["TWITTER_CONSUMER_SECRET"],
-        access_token: ENV["TWITTER_TOKEN"],
-        access_token_secret: ENV["TWITTER_SECRET"],
-      )
-      response = client.post("https://api.twitter.com/1.1/statuses/update.json", status: message)
+      response = Twitter.tweet(message)
       $stdout.puts "Tweet response: #{response.inspect}"
     end
 

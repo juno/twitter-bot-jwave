@@ -4,10 +4,12 @@ source "https://rubygems.org"
 
 ruby "3.2.2"
 
+gem "dotenv"
 gem "nokogiri"
+gem "oauth"
 gem "redis"
 gem "sentry-ruby"
-gem "simple_twitter"
+gem "typhoeus"
 
 group :development, :test do
   gem "rspec"
