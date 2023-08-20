@@ -3,10 +3,9 @@ updates:
 - package-ecosystem: bundler
   directory: "/"
   schedule:
-    interval: weekly
-    day: saturday
+    interval: monthly
     timezone: Asia/Tokyo
-  open-pull-requests-limit: 10
+  open-pull-requests-limit: 30
   groups:
     rspec-dependencies:
       patterns:
