@@ -28,9 +28,9 @@ GEM
       racc
     racc (1.7.3)
     rainbow (3.1.1)
-    redis (5.0.8)
+    redis (5.1.0)
       redis-client (>= 0.17.0)
-    redis-client (0.18.0)
+    redis-client (0.20.0)
       connection_pool
     regexp_parser (2.9.0)
     rexml (3.2.6)
