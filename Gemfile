@@ -4,7 +4,9 @@ source "https://rubygems.org"
 
 ruby "3.4.1"
 
+gem "base64"
 gem "dotenv"
+gem "logger"
 gem "nokogiri"
 gem "oauth"
 gem "redis"
