@@ -46,7 +46,7 @@ Deployment is automatic on git push to main branch.
 CONTACT
 -----
 
-*  Junya Ogura - https://twitter.com/junya
+*  Junya Ogura - https://bsky.app/profile/junyaogura.bsky.social
 
 
 LICENSE
