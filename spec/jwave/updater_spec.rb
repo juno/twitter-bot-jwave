@@ -6,11 +6,15 @@ require_relative "../../lib/jwave/updater"
 
 RSpec.describe Jwave::Updater do
   describe "#update" do
-    let(:updater) { described_class.new }
     let(:xml_content) do
       File.read(File.expand_path("../fixtures/now_on_air_song_v2.xml", __dir__))
     end
     let(:last_modified) { Time.now }
+    let(:updater) do
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with("REDIS_URL").and_return("redis://localhost:6379")
+      described_class.new
+    end
 
     before do
       # Redis mock
@@ -33,7 +37,7 @@ RSpec.describe Jwave::Updater do
 
         updater.update
 
-        expect(posted_message).to include("TOKYO M.A.A.D SPIN")
+        expect(posted_message).to include("BRAVE GENERATION")
         expect(posted_message).to match(/https?:\/\//)
       end
     end
