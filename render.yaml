@@ -1,26 +1,24 @@
 services:
   - type: worker
-    name: twitter-bot-jwave
+    name: bluesky-bot-jwave
     env: ruby
     repo: https://github.com/juno/twitter-bot-jwave.git
     region: oregon
     plan: starter
     branch: main
     buildCommand: "bundle install"
-    startCommand: "bundle exec ruby bin/twitter-bot-jwave"
+    startCommand: "bundle exec ruby bin/bluesky-bot-jwave"
     autoDeploy: true
     envVars:
+      - key: BLUESKY_APP_PASSWORD
+        sync: false
+      - key: BLUESKY_IDENTIFIER
+        sync: false
+      - key: BLUESKY_PDS_URL
+        sync: false
       - key: DRY_RUN
         sync: false
       - key: REDIS_URL
         sync: false
       - key: SENTRY_DSN
-        sync: false
-      - key: TWITTER_CONSUMER_KEY
-        sync: false
-      - key: TWITTER_CONSUMER_SECRET
-        sync: false
-      - key: TWITTER_SECRET
-        sync: false
-      - key: TWITTER_TOKEN
         sync: false
