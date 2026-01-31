@@ -4,7 +4,7 @@ require "open-uri"
 require "redis"
 require "yaml"
 
-require_relative "twitter"
+require_relative "bluesky"
 
 module Jwave
   # Tweet updater
@@ -89,8 +89,8 @@ module Jwave
 
     # @param [String] message
     def tweet(message)
-      response = Twitter.tweet(message)
-      $stdout.puts "Tweet response: #{response.inspect}"
+      response = Bluesky.post(message)
+      $stdout.puts "Bluesky response: #{response.inspect}"
     end
 
     # @param [OnAirData] data

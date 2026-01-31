@@ -1,8 +1,8 @@
-# J-WAVE NOW ON-AIR twitter bot
+# J-WAVE NOW ON-AIR Bluesky bot
 
 ## DESCRIPTION
 
-This bot posts about songs which aired from the Japanese Radio Station "J-WAVE".
+This bot posts about songs which aired from the Japanese Radio Station "J-WAVE" to Bluesky.
 Song information will fetched from http://www.j-wave.co.jp/alladdin/ .
 
 
@@ -16,10 +16,12 @@ Bundle gems.
 
     $ bundle install --path .bundle
 
-Create and edit `.env` file to set Redis URL and Twitter OAuth API keys.
+Create and edit `.env` file to set Redis URL and Bluesky credentials.
 
     $ cp example.env .env
     $ vi .env
+
+Set `BLUESKY_IDENTIFIER` (e.g., `username.bsky.social`) and `BLUESKY_APP_PASSWORD` (generate from Bluesky settings).
 
 
 ## USAGE
@@ -28,40 +30,23 @@ Create and edit `.env` file to set Redis URL and Twitter OAuth API keys.
     $ heroku local
 
 
-## DEPLOYMENT TO HEROKU
+## DEPLOYMENT TO RENDER
 
-Create a new app.
+This bot is configured to deploy to Render.com.
 
-    $ heroku create [YOUR_APP_NAME]
+Set configuration environment variables in Render dashboard:
 
-Add `redistogo:nano` addon.
+    BLUESKY_IDENTIFIER="username.bsky.social"
+    BLUESKY_APP_PASSWORD="your-app-password"
+    REDIS_URL="redis://..."
 
-    $ heroku addons:add redistogo:nano
-
-Set configuration env.
-
-    $ heroku config:set TWITTER_CONSUMER_KEY="..." \
-      TWITTER_CONSUMER_SECRET="..." \
-      TWITTER_TOKEN="..." \
-      TWITTER_SECRET="..."
-
-Push to deploy.
-
-    $ git push heroku master
-
-Start `bot` process.
-
-    $ heroku ps:scale bot=1
-
-Check log.
-
-    $ heroku logs
+Deployment is automatic on git push to main branch.
 
 
 CONTACT
 -----
 
-*  Junya Ogura - https://twitter.com/junya
+*  Junya Ogura - https://bsky.app/profile/junyaogura.bsky.social
 
 
 LICENSE
