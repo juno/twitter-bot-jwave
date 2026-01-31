@@ -11,25 +11,25 @@ RSpec.describe Bluesky do
         allow(ENV).to receive(:[]).with("BLUESKY_APP_PASSWORD").and_return("test-password")
         allow(ENV).to receive(:[]).with("BLUESKY_PDS_URL").and_return(nil)
 
-        # bskyrb gemのモック
-        credentials = instance_double(Bskyrb::Credentials)
-        session = instance_double(Bskyrb::Session)
-        record_manager = instance_double(Bskyrb::RecordManager)
+        # minisky gemのモック
+        client = instance_double(Bluesky::Client)
+        user = instance_double("User", did: "did:plc:test123")
 
-        expect(Bskyrb::Credentials).to receive(:new)
-          .with("test.bsky.social", "test-password")
-          .and_return(credentials)
+        expect(Bluesky::Client).to receive(:new)
+          .with("test.bsky.social", "test-password", "https://bsky.social")
+          .and_return(client)
 
-        expect(Bskyrb::Session).to receive(:new)
-          .with(credentials, "https://bsky.social")
-          .and_return(session)
+        expect(client).to receive(:user).and_return(user)
 
-        expect(Bskyrb::RecordManager).to receive(:new)
-          .with(session)
-          .and_return(record_manager)
-
-        expect(record_manager).to receive(:create_post)
-          .with("Test message")
+        expect(client).to receive(:post_request)
+          .with("com.atproto.repo.createRecord", {
+                  repo: "did:plc:test123",
+                  collection: "app.bsky.feed.post",
+                  record: hash_including(
+                    text: "Test message",
+                    langs: ["ja"],
+                  )
+                })
           .and_return(true)
 
         result = Bluesky.post("Test message")

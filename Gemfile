@@ -5,7 +5,7 @@ source "https://rubygems.org"
 ruby file: ".tool-versions"
 
 gem "base64"
-gem "bskyrb"
+gem "minisky"
 gem "dotenv"
 gem "logger"
 gem "nokogiri"
